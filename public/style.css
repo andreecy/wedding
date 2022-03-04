@@ -1,0 +1,6 @@
+.bg {
+  background-image: url("background1.svg");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+}
