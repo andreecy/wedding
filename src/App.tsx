@@ -1,17 +1,21 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import Page from './Page';
 
 function App() {
   return (
     <>
-    <div className="container mx-auto p-4 bg min-h-screen">
-      <p className="text-slate-400 font-semibold text-center font-text">SAVE THE DATE</p>
-      <p className="text-white text-center text-8xl font-script">Alsa</p>
-      <p className="text-white text-center text-8xl font-script">&</p>
-      <p className="text-white text-center text-8xl font-script">Andree</p>
-      <p className="text-slate-400 font-semibold text-center font-text">7 May 2022</p>
-    </div>
+      <Page>
+        <p className="text-gray-500 font-semibold text-center mt-4">SAVE THE DATE</p>
+        <div className="my-20">
+          <p className="text-white text-center text-8xl font-title">Alsa</p>
+          <p className="text-white text-center text-8xl font-title">&</p>
+          <p className="text-white text-center text-8xl font-title">Andree</p>
+        </div>
+        <p className="text-gray-500 font-semibold text-center">7 May 2022</p>
+      </Page>
+
+      <Page>
+        <p className="text-gray-500">Acara Utama</p>
+      </Page>
     </>
   );
 }
