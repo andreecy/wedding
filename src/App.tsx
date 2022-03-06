@@ -1,3 +1,5 @@
+import moment from 'moment';
+import { useEffect, useState } from 'react';
 import Page from './Page';
 
 function App() {
@@ -10,7 +12,7 @@ function App() {
           <p className="text-white text-center text-8xl font-title">&</p>
           <p className="text-white text-center text-8xl font-title">Andree</p>
         </div>
-        <p className="text-gray-500 font-semibold text-center">7 May 2022</p>
+        <p className="text-gray-500 font-semibold text-center">25 May 2022</p>
       </Page>
 
       <Page>
@@ -46,37 +48,22 @@ function App() {
         <div className="flex flex-row">
           <div className='flex-1'>
             <p className="text-white text-center font-bold mb-2">Akad Nikah</p>
-            <p className="text-white text-center text-sm">Sabtu, 7 Mei 2022 <br /> 09.00 s/d 22.00 WIB</p>
-            <p className="text-white text-center text-sm mt-6">Kediaman Mempelai Wanita</p>
-            <p className="text-white text-center text-sm mt-2">Jambe, Gemarang, Kedunggalar, Ngawi</p>
+            <p className="text-white text-center text-sm">Kamis, 24 Februari 2022 <br /> 08.00 s/d selesai</p>
+            <p className="text-white text-center text-sm mt-6">Kantor Urusan Agama</p>
+            <p className="text-white text-center text-sm mt-2">Kedunggalar, Ngawi</p>
           </div>
           <div className='flex-1'>
             <p className="text-white text-center font-bold mb-2">Resepsi Pernikahan</p>
-            <p className="text-white text-center text-sm">Sabtu, 7 Mei 2022 <br /> 09.00 s/d 22.00 WIB</p>
+            <p className="text-white text-center text-sm">Rabu, 25 Mei 2022 <br /> 09.00 s/d selesai</p>
             <p className="text-white text-center text-sm mt-6">Kediaman Mempelai Wanita</p>
             <p className="text-white text-center text-sm mt-2">Jambe, Gemarang, Kedunggalar, Ngawi</p>
           </div>
         </div>
         <div className="my-40"></div>
 
-        <div className="flex flex-row justify-center mb-6">
-          <div className="w-[50px]">
-            <p className="text-white text-xl font-bold text-center">30</p>
-            <p className="text-white text-xs text-center">Hari</p>
-          </div>
-          <div className="w-[50px]">
-            <p className="text-white text-xl font-bold text-center">24</p>
-            <p className="text-white text-xs text-center">Jam</p>
-          </div>
-          <div className="w-[50px]">
-            <p className="text-white text-xl font-bold text-center">30</p>
-            <p className="text-white text-xs text-center">Menit</p>
-          </div>
-          <div className="w-[50px]">
-            <p className="text-white text-xl font-bold text-center">30</p>
-            <p className="text-white text-xs text-center">Detik</p>
-          </div>
-        </div>
+
+
+        <Countdown />
 
         <p className="text-white text-center text-sm mb-4">Menuju hari istimewa kami</p>
         <p className="text-white text-center text-sm">Kami berharap Bapak/Ibu/Saudara/i menjadi bagian dari hari istimewa kami</p>
@@ -103,14 +90,14 @@ function App() {
       </Page>
 
       <Page>
-        <img src="photo.jpg" alt="photo" className='rounded-2xl shadow-md hover:shadow-xl'/>
+        <img src="photo.jpg" alt="wedding" className='rounded-2xl shadow-md hover:shadow-xl' />
         <p className='mb-10'></p>
 
-        <p className="text-white text-center font-bold">Kado Digital</p>
+        {/* <p className="text-white text-center font-bold">Kado Digital</p>
         <p className="text-white text-center text-sm my-4">Kami menerima kado pernikahan dalam bentuk digital</p>
         <div className='flex justify-center'>
           <a href="#" className="bg-gray-600 p-3 rounded-lg inline-block text-white font-bold hover:shadow-md hover:bg-gray-500">KIRIM KADO</a>
-        </div>
+        </div> */}
 
         <div className="mt-20">
           <p className="text-white text-center text-sm mb-4">
@@ -126,6 +113,74 @@ function App() {
       </Page>
     </>
   );
+}
+
+const Countdown = () => {
+  const [months, setMonths] = useState(0)
+  const [days, setDays] = useState(0)
+  const [hours, setHours] = useState(0)
+  const [minutes, setMinutes] = useState(0)
+  const [seconds, setSeconds] = useState(0)
+
+  useEffect(() => {
+    function update() {
+      var eventTime, currentTime, duration: any
+
+      var countdown: any;
+      // calculate difference between two times
+      eventTime = moment("2022-05-25T09:00:00");
+
+      // based on time set in user's computer time / OS
+      currentTime = moment();
+      // get duration between two times
+      duration = moment.duration(eventTime.diff(currentTime));
+
+      // loop to countdown every 1 second
+      // get updated duration
+      duration = moment.duration(duration, 'milliseconds');
+
+      // let months, days, hours, minutes, seconds
+      // if duration is >= 0
+      if (duration.asSeconds() <= 0) {
+        // hide the countdown element
+      } else {
+        // otherwise, show the updated countdown
+        countdown = duration.months() + " month " + duration.days() + " days " + duration.hours() + " hours " + duration.minutes() + " minutes " + duration.seconds() + " seconds";
+        console.log(countdown)
+
+        setMonths(duration.months())
+        setDays(duration.days())
+        setHours(duration.hours())
+        setMinutes(duration.minutes())
+        setSeconds(duration.seconds())
+      }
+    }
+
+    update();
+  })
+
+  return (
+    <>
+      <div className="flex flex-row justify-center mb-6">
+        <div className="w-[50px]">
+          <p className="text-white text-xl font-bold text-center">{days}</p>
+          <p className="text-white text-xs text-center">Hari</p>
+        </div>
+        <div className="w-[50px]">
+          <p className="text-white text-xl font-bold text-center">{hours}</p>
+          <p className="text-white text-xs text-center">Jam</p>
+        </div>
+        <div className="w-[50px]">
+          <p className="text-white text-xl font-bold text-center">{minutes}</p>
+          <p className="text-white text-xs text-center">Menit</p>
+        </div>
+        <div className="w-[50px]">
+          <p className="text-white text-xl font-bold text-center">{seconds}</p>
+          <p className="text-white text-xs text-center">Detik</p>
+        </div>
+      </div>
+    </>
+  )
 }
 
 export default App;
