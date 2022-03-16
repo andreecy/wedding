@@ -5,6 +5,7 @@ import Page from './Page';
 function App() {
   return (
     <>
+      <Nav/>
       <Page>
         <p className="text-gray-500 font-semibold text-center mt-4">SAVE THE DATE</p>
         <div className="my-20">
@@ -116,46 +117,37 @@ function App() {
 }
 
 const Countdown = () => {
-  const [months, setMonths] = useState(0)
+  const [currentTime, setCurrentTime] = useState(moment())
   const [days, setDays] = useState(0)
   const [hours, setHours] = useState(0)
   const [minutes, setMinutes] = useState(0)
   const [seconds, setSeconds] = useState(0)
+  const eventTime = moment("2022-05-25T09:00:00");
 
-  useEffect(() => {
-    function update() {
-      var eventTime, currentTime, duration: any
+  function update() {
+      var duration: any
 
-      var countdown: any;
-      // calculate difference between two times
-      eventTime = moment("2022-05-25T09:00:00");
+      setCurrentTime(moment());
 
-      // based on time set in user's computer time / OS
-      currentTime = moment();
       // get duration between two times
       duration = moment.duration(eventTime.diff(currentTime));
 
-      // loop to countdown every 1 second
       // get updated duration
       duration = moment.duration(duration, 'milliseconds');
 
-      // let months, days, hours, minutes, seconds
       // if duration is >= 0
       if (duration.asSeconds() <= 0) {
         // hide the countdown element
       } else {
-        // otherwise, show the updated countdown
-        countdown = duration.months() + " month " + duration.days() + " days " + duration.hours() + " hours " + duration.minutes() + " minutes " + duration.seconds() + " seconds";
-        console.log(countdown)
-
-        setMonths(duration.months())
-        setDays(duration.days())
+        setDays(parseInt(duration.asDays()))
         setHours(duration.hours())
         setMinutes(duration.minutes())
         setSeconds(duration.seconds())
       }
     }
 
+  useEffect(() => {
+    
     update();
   })
 
@@ -180,6 +172,28 @@ const Countdown = () => {
         </div>
       </div>
     </>
+  )
+}
+
+const Nav = () => {
+  return (
+    <div className="fixed block bg-gray-600 bottom-0 left-0 right-0 p-2">
+      <div className="flex justify-center">
+        <div className="bg-gray-500 p-2 w-[50px] h-[50px] rounded-xl lh-[50px]">
+	  img
+	</div>
+	<div className="bg-gray-500 p-2 w-[50px] h-[50px] rounded-xl lh-[50px]">
+	  img
+	</div>
+	<div className="bg-gray-500 p-2 w-[50px] h-[50px] rounded-xl lh-[50px]">
+	  img
+	</div>
+	<div className="bg-gray-500 p-2 w-[50px] h-[50px] rounded-xl lh-[50px]">
+	  img
+	</div>
+
+      </div>
+    </div>
   )
 }
 
