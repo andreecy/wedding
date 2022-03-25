@@ -29,8 +29,8 @@
       "prettier/prettier": [
          "warn",
          {
-            "endOfLine": "auto"
-            // "semi": false
+            "endOfLine": "auto",
+            "semi": false
          }
       ],
       "react/react-in-jsx-scope": "off"

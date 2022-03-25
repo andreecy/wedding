@@ -31,9 +31,9 @@ const Countdown = () => {
     }
   }
 
-  useEffect(() => {
-    update()
-  })
+  // useEffect(() => {
+  //   update()
+  // })
 
   return (
     <>
