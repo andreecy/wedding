@@ -1,7 +1,6 @@
-import moment from "moment";
-import { useEffect, useState } from "react";
-import Page from "./Page";
-import { HomeOutline, LocationOutline } from "react-ionicons";
+import Countdown from "./Countdown"
+import Nav from "./Nav"
+import Page from "./Page"
 
 function App() {
   return (
@@ -157,91 +156,7 @@ function App() {
         </div>
       </Page>
     </>
-  );
+  )
 }
 
-const Countdown = () => {
-  const [currentTime, setCurrentTime] = useState(moment());
-  const [days, setDays] = useState(0);
-  const [hours, setHours] = useState(0);
-  const [minutes, setMinutes] = useState(0);
-  const [seconds, setSeconds] = useState(0);
-  const eventTime = moment("2022-05-25T09:00:00");
-
-  function update() {
-    let duration: any;
-
-    setCurrentTime(moment());
-
-    // get duration between two times
-    duration = moment.duration(eventTime.diff(currentTime));
-
-    // get updated duration
-    duration = moment.duration(duration, "milliseconds");
-
-    // if duration is >= 0
-    if (duration.asSeconds() <= 0) {
-      // hide the countdown element
-    } else {
-      setDays(parseInt(duration.asDays()));
-      setHours(duration.hours());
-      setMinutes(duration.minutes());
-      setSeconds(duration.seconds());
-    }
-  }
-
-  useEffect(() => {
-    update();
-  });
-
-  return (
-    <>
-      <div className="flex flex-row justify-center mb-6">
-        <div className="w-[50px]">
-          <p className="text-white text-xl font-bold text-center">{days}</p>
-          <p className="text-white text-xs text-center">Hari</p>
-        </div>
-        <div className="w-[50px]">
-          <p className="text-white text-xl font-bold text-center">{hours}</p>
-          <p className="text-white text-xs text-center">Jam</p>
-        </div>
-        <div className="w-[50px]">
-          <p className="text-white text-xl font-bold text-center">{minutes}</p>
-          <p className="text-white text-xs text-center">Menit</p>
-        </div>
-        <div className="w-[50px]">
-          <p className="text-white text-xl font-bold text-center">{seconds}</p>
-          <p className="text-white text-xs text-center">Detik</p>
-        </div>
-      </div>
-    </>
-  );
-};
-
-const Nav = () => {
-  return (
-    <div className="fixed block bottom-0 left-0 right-0 p-2">
-      <div className="flex flex-row justify-center">
-        <div className="basis-full lg:basis-1/3 flex flex-row justify-center">
-          <div className="bg-gray-500 m-1 p-2 w-[50px] h-[50px] rounded-xl lh-[50px]">
-            <HomeOutline />
-          </div>
-
-          <div className="bg-gray-500 m-1 p-2 w-[50px] h-[50px] rounded-xl lh-[50px]">
-            <LocationOutline />
-          </div>
-
-          <div className="bg-gray-500 m-1 p-2 w-[50px] h-[50px] rounded-xl lh-[50px]">
-            img
-          </div>
-
-          <div className="bg-gray-500 m-1 p-2 w-[50px] h-[50px] rounded-xl lh-[50px]">
-            img
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-};
-
-export default App;
+export default App
