@@ -8,9 +8,8 @@ function Page(props: any) {
           </div>
         </div>
       </div>
-
     </>
-  );
+  )
 }
 
-export default Page;
+export default Page

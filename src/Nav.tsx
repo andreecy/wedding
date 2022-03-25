@@ -1,4 +1,4 @@
-import { HomeOutline, LocationOutline } from "react-ionicons"
+// import { HomeOutline, LocationOutline } from "react-ionicons"
 
 const Nav = () => {
   return (
@@ -6,11 +6,11 @@ const Nav = () => {
       <div className="flex flex-row justify-center">
         <div className="basis-full lg:basis-1/3 flex flex-row justify-center">
           <div className="bg-gray-500 m-1 p-2 w-[50px] h-[50px] rounded-xl lh-[50px]">
-            <HomeOutline />
+            {/* <HomeOutline /> */}
           </div>
 
           <div className="bg-gray-500 m-1 p-2 w-[50px] h-[50px] rounded-xl lh-[50px]">
-            <LocationOutline />
+            {/* <LocationOutline /> */}
           </div>
 
           <div className="bg-gray-500 m-1 p-2 w-[50px] h-[50px] rounded-xl lh-[50px]">

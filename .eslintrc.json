@@ -1,58 +1,58 @@
 {
-  "env":{
-     "browser":true,
-     "es2021":true
-  },
-  "settings": {
-     "react":{
-        "version": "detect"
-     }
-  },
-  "extends":[
-     "plugin:react/recommended",
-     "plugin:prettier/recommended"
-  ],
-  "parser":"@typescript-eslint/parser",
-  "parserOptions":{
-     "ecmaFeatures":{
-        "jsx":true
-     },
-     "ecmaVersion":12,
-     "sourceType":"module"
-  },
-  "plugins":[
-     "react",
-     "@typescript-eslint",
-     "react-hooks"
-  ],
-  "rules":{
+   "env": {
+      "browser": true,
+      "es2021": true
+   },
+   "settings": {
+      "react": {
+         "version": "detect"
+      }
+   },
+   "extends": [
+      "plugin:react/recommended",
+      "plugin:prettier/recommended"
+   ],
+   "parser": "@typescript-eslint/parser",
+   "parserOptions": {
+      "ecmaFeatures": {
+         "jsx": true
+      },
+      "ecmaVersion": 12,
+      "sourceType": "module"
+   },
+   "plugins": [
+      "@typescript-eslint",
+      "react",
+      "react-hooks"
+   ],
+   "rules": {
       "prettier/prettier": [
-        "warn",
-        {
-          "endOfLine": "auto",
-          "semi": false
-        }
+         "warn",
+         {
+            "endOfLine": "auto"
+            // "semi": false
+         }
       ],
-    "react/react-in-jsx-scope": "off",
-     "no-use-before-define":"off",
-     "@typescript-eslint/no-use-before-define":[
-        "warn"
-     ],
-     "react/jsx-filename-extension":[
-        "warn",
-        {
-           "extensions":[
-              ".tsx"
-           ]
-        }
-     ],
-     "no-shadow":"off",
-     "@typescript-eslint/no-shadow":[
-        "error"
-     ],
-     "react-hooks/rules-of-hooks":"error",
-     "react-hooks/exhaustive-deps":"warn",
-     "import/prefer-default-export":"off",
-     "react/prop-types":"off"
-  }
+      "react/react-in-jsx-scope": "off"
+      // "no-use-before-define": "off",
+      // "@typescript-eslint/no-use-before-define": [
+      //    "warn"
+      // ],
+      // "react/jsx-filename-extension": [
+      //    "warn",
+      //    {
+      //       "extensions": [
+      //          ".tsx"
+      //       ]
+      //    }
+      // ],
+      // "no-shadow": "off",
+      // "@typescript-eslint/no-shadow": [
+      //    "error"
+      // ],
+      // "react-hooks/rules-of-hooks": "error",
+      // "react-hooks/exhaustive-deps": "warn",
+      // "import/prefer-default-export": "off",
+      // "react/prop-types": "off"
+   }
 }
