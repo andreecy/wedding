@@ -1,4 +1,5 @@
 import { useEffect } from "react"
+import queryString from "query-string"
 import Countdown from "./Countdown"
 import Nav from "./Nav"
 import Page from "./Page"
@@ -37,14 +38,16 @@ function App() {
     })
   }, [])
 
+  const { to } = queryString.parse(location.search)
+
   return (
     <>
       <Nav />
       <Page id="cover">
         <p className="text-gray-500 font-semibold text-center mt-4 show-scroll">
-          SAVE THE DATE
+          The Wedding
         </p>
-        <div className="my-20">
+        <div className="my-10">
           <p className="text-white text-center text-8xl font-title show-scroll">
             Alsa
           </p>
@@ -55,9 +58,18 @@ function App() {
             Andree
           </p>
         </div>
-        <p className="text-gray-500 font-semibold text-center show-scroll">
+        <p className="text-gray-500 font-semibold text-center show-scroll mb-6">
           25 May 2022
         </p>
+        <div className="bg-white/10 hover:shadow-lg rounded-lg my-5 p-4 show-scroll">
+          <p className="text-center text-gray-300">Kepada Yth.</p>
+          <p className="text-center text-gray-300 text-xl font-bold my-4">
+            {to}
+          </p>
+          <p className="text-gray-300 text-center text-xs">
+            Mohon maaf jika ada kesalahan penulisan nama/gelar
+          </p>
+        </div>
       </Page>
 
       <Page>
@@ -72,7 +84,7 @@ function App() {
 
         <div className="flex flex-row mt-[150px]">
           <div className="flex-1">
-            <p className="font-title text-white text-3xl text-center show-scroll">
+            <p className="font-title text-white text-4xl text-center show-scroll">
               Alsa Permata Yuniarti
             </p>
             <p className="text-white text-center text-sm my-4 show-scroll">
@@ -83,7 +95,7 @@ function App() {
             </p>
           </div>
           <div className="flex-1">
-            <p className="font-title text-white text-3xl text-center show-scroll">
+            <p className="font-title text-white text-4xl text-center show-scroll">
               Andree Christian Yulianto
             </p>
             <p className="text-white text-center text-sm my-4 show-scroll">
@@ -119,13 +131,13 @@ function App() {
               Resepsi Pernikahan
             </p>
             <p className="text-white text-center text-sm">
-              Rabu, 25 Mei 2022 <br /> 09.00 s/d selesai
+              Rabu, 25 Mei 2022 <br /> 10.00 s/d selesai
             </p>
             <p className="text-white text-center text-sm mt-6">
-              Kediaman Mempelai Wanita
+              Kediaman Mempelai Pria
             </p>
             <p className="text-white text-center text-sm mt-2">
-              Jambe, Gemarang, Kedunggalar, Ngawi
+              Dungus, Karangasri, Ngawi
             </p>
           </div>
         </div>
@@ -148,8 +160,14 @@ function App() {
         </p>
 
         <div className="flex justify-center show-scroll">
-          <iframe
+          {/* <iframe
             src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d9409.874635571721!2d111.3607724769919!3d-7.424805722551735!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xcf8c263ef5a000cd!2zN8KwMjUnMzEuMCJTIDExMcKwMjEnMzMuMiJF!5e0!3m2!1sen!2sid!4v1645570302626!5m2!1sen!2sid"
+            width="280"
+            height="450"
+            loading="lazy"
+          ></iframe> */}
+          <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3956.5692205188043!2d111.44951725073727!3d-7.40206810910382!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xb1f93659657f6acf!2zN8KwMjQnMDcuNSJTIDExMcKwMjcnMDIuNSJF!5e0!3m2!1sen!2sid!4v1648372638564!5m2!1sen!2sid"
             width="280"
             height="450"
             loading="lazy"

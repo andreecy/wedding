@@ -31,9 +31,10 @@ const Countdown = () => {
     }
   }
 
-  // useEffect(() => {
-  //   update()
-  // })
+  useEffect(() => {
+    const interval = setInterval(update, 1000)
+    return () => clearInterval(interval)
+  })
 
   return (
     <>
