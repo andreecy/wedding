@@ -1,9 +1,11 @@
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
 import queryString from "query-string"
 import Countdown from "./Countdown"
 import Nav from "./Nav"
 import Page from "./Page"
+import AudioPlayer from "./AudioPlayer"
 
+//scroll animation observer
 const callback = function (entries: any) {
   entries.forEach((entry: any) => {
     // console.log(entry)
@@ -23,9 +25,11 @@ const callback = function (entries: any) {
 const observer = new IntersectionObserver(callback)
 
 function App() {
+  const [isOpen, setIsOpen] = useState(false)
+
   // update once
   useEffect(() => {
-    console.log("update once")
+    // console.log("update once")
     const targets = document.querySelectorAll(".show-scroll")
 
     targets.forEach(function (target) {
@@ -43,25 +47,50 @@ function App() {
   return (
     <>
       <Nav />
+      <AudioPlayer isOpen={isOpen} />
+
+      {!isOpen && (
+        <div className="fixed block w-full h-full p-2 bg-gray-800">
+          <div className="flex flex-col bg-white w-[500px] p-4 rounded-2xl mx-auto my-10 shadow-xl">
+            <p className="text-center">Undangan Pernikahan</p>
+            <p className="text-center text-5xl font-bold font-title show-scroll my-10">
+              Alsa & Andree
+            </p>
+            <p className="text-center mb-4">❤ Rabu, 25 Mei 2022 ❤</p>
+
+            <hr />
+
+            <div className="my-4">
+              <p className="text-center text-sm">Kepada Yth.</p>
+              <p className="text-center  text-xl font-bold my-4">{to}</p>
+            </div>
+
+            <button
+              className="self-center border-gray-500 border-solid border-2 hover:bg-gray-500 hover:text-white p-2 rounded-full"
+              onClick={() => setIsOpen(true)}
+            >
+              Buka Undangan
+            </button>
+            <div className="self-center w-[30px] h-[30px] text-center leading-[30px] my-2">
+              <i className="fas fa-arrow-down text-gray-500 text-2xl animate-bounce"></i>
+            </div>
+          </div>
+        </div>
+      )}
+
       <Page id="cover">
-        <p className="text-gray-500 font-semibold text-center mt-4 show-scroll">
+        <p className="text-gray-500 font-semibold text-center mt-4">
           The Wedding
         </p>
         <div className="my-10">
-          <p className="text-white text-center text-8xl font-title show-scroll">
-            Alsa
-          </p>
-          <p className="text-white text-center text-8xl font-title show-scroll">
-            &
-          </p>
-          <p className="text-white text-center text-8xl font-title show-scroll">
-            Andree
-          </p>
+          <p className="text-white text-center text-8xl font-title">Alsa</p>
+          <p className="text-white text-center text-8xl font-title">&</p>
+          <p className="text-white text-center text-8xl font-title">Andree</p>
         </div>
-        <p className="text-gray-500 font-semibold text-center show-scroll mb-6">
+        <p className="text-gray-500 font-semibold text-center mb-6">
           25 May 2022
         </p>
-        <div className="bg-white/10 hover:shadow-lg rounded-lg my-5 p-4 show-scroll">
+        <div className="bg-white/10 hover:shadow-lg rounded-lg my-5 p-4">
           <p className="text-center text-gray-300">Kepada Yth.</p>
           <p className="text-center text-gray-300 text-xl font-bold my-4">
             {to}
