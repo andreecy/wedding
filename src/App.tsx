@@ -40,7 +40,7 @@ function App() {
       target.classList.add("translate-y-3")
       observer.observe(target)
     })
-  }, [])
+  }, [isOpen])
 
   const { to } = queryString.parse(location.search)
 
@@ -51,203 +51,219 @@ function App() {
 
       {!isOpen && (
         <div className="fixed block w-full h-full p-2 bg-gray-800">
-          <div className="flex flex-col bg-white w-[500px] p-4 rounded-2xl mx-auto my-10 shadow-xl">
-            <p className="text-center">Undangan Pernikahan</p>
-            <p className="text-center text-5xl font-bold font-title show-scroll my-10">
-              Alsa & Andree
-            </p>
-            <p className="text-center mb-4">❤ Rabu, 25 Mei 2022 ❤</p>
+          <div className="flex flex-row justify-center">
+            <div className="basis-full lg:basis-1/3">
+              <div className="flex flex-col bg-white p-4 rounded-2xl mx-auto my-10 shadow-xl">
+                <p className="text-center">Undangan Pernikahan</p>
+                <p className="text-center text-5xl font-bold font-title my-10">
+                  Andree & Alsa
+                </p>
+                <p className="text-center mb-4">❤ Rabu, 25 Mei 2022 ❤</p>
 
-            <hr />
+                <hr />
 
-            <div className="my-4">
-              <p className="text-center text-sm">Kepada Yth.</p>
-              <p className="text-center  text-xl font-bold my-4">{to}</p>
-            </div>
+                <div className="my-4">
+                  <p className="text-center text-sm">Kepada Yth.</p>
+                  <p className="text-center  text-xl font-bold my-4">{to}</p>
+                </div>
 
-            <button
-              className="self-center border-gray-500 border-solid border-2 hover:bg-gray-500 hover:text-white p-2 rounded-full"
-              onClick={() => setIsOpen(true)}
-            >
-              Buka Undangan
-            </button>
-            <div className="self-center w-[30px] h-[30px] text-center leading-[30px] my-2">
-              <i className="fas fa-arrow-down text-gray-500 text-2xl animate-bounce"></i>
+                <button
+                  className="self-center border-gray-500 border-solid border-2 hover:bg-gray-500 hover:text-white p-2 rounded-full"
+                  onClick={() => setIsOpen(true)}
+                >
+                  Buka Undangan
+                </button>
+                <div className="self-center w-[30px] h-[30px] text-center leading-[30px] my-2">
+                  <i className="fas fa-arrow-up text-gray-500 text-2xl animate-bounce"></i>
+                </div>
+              </div>
             </div>
           </div>
         </div>
       )}
 
-      <Page id="cover">
-        <p className="text-gray-500 font-semibold text-center mt-4">
-          The Wedding
-        </p>
-        <div className="my-10">
-          <p className="text-white text-center text-8xl font-title">Alsa</p>
-          <p className="text-white text-center text-8xl font-title">&</p>
-          <p className="text-white text-center text-8xl font-title">Andree</p>
-        </div>
-        <p className="text-gray-500 font-semibold text-center mb-6">
-          25 May 2022
-        </p>
-        <div className="bg-white/10 hover:shadow-lg rounded-lg my-5 p-4">
-          <p className="text-center text-gray-300">Kepada Yth.</p>
-          <p className="text-center text-gray-300 text-xl font-bold my-4">
-            {to}
-          </p>
-          <p className="text-gray-300 text-center text-xs">
-            Mohon maaf jika ada kesalahan penulisan nama/gelar
-          </p>
-        </div>
-      </Page>
+      {isOpen && (
+        <>
+          <Page id="cover">
+            <p className="text-gray-500 font-semibold text-center mt-4">
+              The Wedding
+            </p>
+            <div className="my-10">
+              <p className="text-white text-center text-8xl font-title">
+                Andree
+              </p>
+              <p className="text-white text-center text-8xl font-title">&</p>
+              <p className="text-white text-center text-8xl font-title">Alsa</p>
+            </div>
+            <p className="text-gray-500 font-semibold text-center mb-6">
+              25 May 2022
+            </p>
+          </Page>
 
-      <Page>
-        <p></p>
-        <p className="text-white font-bold text-center mt-[100px] mb-4 show-scroll">
-          Assalamu’alaikum Warahmatullahi Wabarakaatuh
-        </p>
-        <p className="text-white text-center text-sm show-scroll">
-          Dengan memohon rahmat dan ridho Allah SWT kami bermaksud
-          menyelenggarakan pernikahan putra putri kami:
-        </p>
+          <Page>
+            <p></p>
+            <p className="text-white font-bold text-center mt-[100px] mb-4 show-scroll">
+              Assalamu’alaikum Warahmatullahi Wabarakaatuh
+            </p>
+            <p className="text-white text-center text-sm show-scroll">
+              Dengan memohon rahmat dan ridho Allah SWT kami bermaksud
+              menyelenggarakan pernikahan putra putri kami:
+            </p>
 
-        <div className="flex flex-row mt-[150px]">
-          <div className="flex-1">
-            <p className="font-title text-white text-4xl text-center show-scroll">
-              Alsa Permata Yuniarti
-            </p>
-            <p className="text-white text-center text-sm my-4 show-scroll">
-              Putri dari <br />
-              Alm. Bpk Amir Mubarok <br />
-              & <br />
-              Almh. Ibu Sujiati
-            </p>
-          </div>
-          <div className="flex-1">
-            <p className="font-title text-white text-4xl text-center show-scroll">
-              Andree Christian Yulianto
-            </p>
-            <p className="text-white text-center text-sm my-4 show-scroll">
-              Putra dari <br />
-              Bpk Agung Kadarjanto <br />
-              & <br />
-              Ibu Susmi Puryati
-            </p>
-          </div>
-        </div>
-      </Page>
+            <div className="flex flex-row mt-[150px]">
+              <div className="flex-1">
+                <p className="font-title text-white text-4xl text-center show-scroll">
+                  Andree Christian Yulianto
+                </p>
+                <p className="text-white text-center text-sm my-4 show-scroll">
+                  Putra dari <br />
+                  Bpk Agung Kadarjanto <br />
+                  & <br />
+                  Ibu Susmi Puryati
+                </p>
+              </div>
+              <div className="flex-1">
+                <p className="font-title text-white text-4xl text-center show-scroll">
+                  Alsa Permata Yuniarti
+                </p>
+                <p className="text-white text-center text-sm my-4 show-scroll">
+                  Putri dari <br />
+                  Alm. Bpk Amir Mubarok <br />
+                  & <br />
+                  Almh. Ibu Sujiati
+                </p>
+              </div>
+            </div>
+          </Page>
 
-      <Page id="date">
-        <p className="text-white text-center font-bold mb-20 show-scroll">
-          Detail Acara
-        </p>
+          <Page id="date">
+            <p className="text-white text-center font-bold mb-20 show-scroll">
+              Detail Acara
+            </p>
 
-        <div className="flex flex-row">
-          <div className="flex-1 show-scroll">
-            <p className="text-white text-center font-bold mb-2">Akad Nikah</p>
-            <p className="text-white text-center text-sm">
-              Kamis, 24 Februari 2022 <br /> 08.00 s/d selesai
-            </p>
-            <p className="text-white text-center text-sm mt-6">
-              Kantor Urusan Agama
-            </p>
-            <p className="text-white text-center text-sm mt-2">
-              Kedunggalar, Ngawi
-            </p>
-          </div>
-          <div className="flex-1 show-scroll">
-            <p className="text-white text-center font-bold mb-2">
-              Resepsi Pernikahan
-            </p>
-            <p className="text-white text-center text-sm">
-              Rabu, 25 Mei 2022 <br /> 10.00 s/d selesai
-            </p>
-            <p className="text-white text-center text-sm mt-6">
-              Kediaman Mempelai Pria
-            </p>
-            <p className="text-white text-center text-sm mt-2">
-              Dungus, Karangasri, Ngawi
-            </p>
-          </div>
-        </div>
-        <div className="my-40"></div>
+            <div className="flex flex-row">
+              <div className="flex-1 show-scroll">
+                <p className="text-white text-center font-bold mb-2">
+                  Akad Nikah
+                </p>
+                <p className="text-white text-center text-sm">
+                  Kamis, 24 Februari 2022 <br /> 08.00 s/d selesai
+                </p>
+                <p className="text-white text-center text-sm mt-6">
+                  Kantor Urusan Agama
+                </p>
+                <p className="text-white text-center text-sm mt-2">
+                  Kedunggalar, Ngawi
+                </p>
+              </div>
+              <div className="flex-1 show-scroll">
+                <p className="text-white text-center font-bold mb-2">
+                  Resepsi Pernikahan
+                </p>
+                <p className="text-white text-center text-sm">
+                  Rabu, 25 Mei 2022 <br /> 10.00 s/d selesai
+                </p>
+                <p className="text-white text-center text-sm mt-6">
+                  Kediaman Mempelai Pria
+                </p>
+                <p className="text-white text-center text-sm mt-2">
+                  Dungus, Karangasri, Ngawi
+                </p>
+              </div>
+            </div>
+            <div className="my-40"></div>
 
-        <Countdown />
+            <Countdown />
 
-        <p className="text-white text-center text-sm mb-4 show-scroll">
-          Menuju hari istimewa kami
-        </p>
-        <p className="text-white text-center text-sm show-scroll">
-          Kami berharap Bapak/Ibu/Saudara/i menjadi bagian dari hari istimewa
-          kami
-        </p>
-      </Page>
+            <p className="text-white text-center text-sm mb-4 show-scroll">
+              Menuju hari istimewa kami
+            </p>
+            <p className="text-white text-center text-sm show-scroll">
+              Kami berharap Bapak/Ibu/Saudara/i menjadi bagian dari hari
+              istimewa kami
+            </p>
+          </Page>
 
-      <Page id="location">
-        <p className="text-white text-center font-bold mb-20 show-scroll">
-          Lokasi Acara
-        </p>
+          <Page id="location">
+            <p className="text-white text-center font-bold mb-20 show-scroll">
+              Lokasi Acara
+            </p>
 
-        <div className="flex justify-center show-scroll">
-          {/* <iframe
+            <div className="flex justify-center show-scroll">
+              {/* <iframe
             src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d9409.874635571721!2d111.3607724769919!3d-7.424805722551735!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xcf8c263ef5a000cd!2zN8KwMjUnMzEuMCJTIDExMcKwMjEnMzMuMiJF!5e0!3m2!1sen!2sid!4v1645570302626!5m2!1sen!2sid"
             width="280"
             height="450"
             loading="lazy"
           ></iframe> */}
-          <iframe
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3956.5692205188043!2d111.44951725073727!3d-7.40206810910382!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xb1f93659657f6acf!2zN8KwMjQnMDcuNSJTIDExMcKwMjcnMDIuNSJF!5e0!3m2!1sen!2sid!4v1648372638564!5m2!1sen!2sid"
-            width="280"
-            height="450"
-            loading="lazy"
-          ></iframe>
-        </div>
-      </Page>
+              <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3956.5692205188043!2d111.44951725073727!3d-7.40206810910382!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xb1f93659657f6acf!2zN8KwMjQnMDcuNSJTIDExMcKwMjcnMDIuNSJF!5e0!3m2!1sen!2sid!4v1648372638564!5m2!1sen!2sid"
+                width="280"
+                height="450"
+                loading="lazy"
+              ></iframe>
+            </div>
+          </Page>
 
-      <Page>
-        <div className="flex flex-col h-full justify-center">
-          <div>
-            <p className="text-white text-right text-sm show-scroll">
-              Dan di antara tanda-tanda kebesaran-Nya ialah Dia menciptakan
-              pasangan-pasangan untukmu dari jenismu sendiri, agar kamu
-              cenderung dan merasa tenteram kepadanya, dan Dia menjadikan di
-              antaramu rasa kasih dan sayang. Sungguh, pada yang demikian itu
-              benar-benar terdapat tanda-tanda bagi kaum yang berpikir.
-            </p>
-            <p className="text-white text-right text-sm font-bold my-2 show-scroll">
-              QS. Ar-Rum : 21
-            </p>
-          </div>
-        </div>
-      </Page>
+          <Page>
+            <div className="flex flex-col h-full justify-center">
+              <div>
+                <p className="text-white text-right text-sm show-scroll">
+                  Dan di antara tanda-tanda kebesaran-Nya ialah Dia menciptakan
+                  pasangan-pasangan untukmu dari jenismu sendiri, agar kamu
+                  cenderung dan merasa tenteram kepadanya, dan Dia menjadikan di
+                  antaramu rasa kasih dan sayang. Sungguh, pada yang demikian
+                  itu benar-benar terdapat tanda-tanda bagi kaum yang berpikir.
+                </p>
+                <p className="text-white text-right text-sm font-bold my-2 show-scroll">
+                  QS. Ar-Rum : 21
+                </p>
+              </div>
+            </div>
+          </Page>
 
-      <Page id="end">
-        <img
-          src="photo.jpg"
-          alt="wedding"
-          className="rounded-2xl shadow-md hover:shadow-xl show-scroll"
-        />
-        <p className="mb-10"></p>
+          <Page id="end">
+            <img
+              src="photo.jpg"
+              alt="wedding"
+              className="rounded-2xl shadow-md hover:shadow-xl show-scroll"
+            />
+            <p className="mb-10"></p>
 
-        {/* <p className="text-white text-center font-bold">Kado Digital</p>
+            {/* <p className="text-white text-center font-bold">Kado Digital</p>
         <p className="text-white text-center text-sm my-4">Kami menerima kado pernikahan dalam bentuk digital</p>
         <div className='flex justify-center'>
           <a href="#" className="bg-gray-600 p-3 rounded-lg inline-block text-white font-bold hover:shadow-md hover:bg-gray-500">KIRIM KADO</a>
         </div> */}
 
-        <div className="mt-20">
-          <p className="text-white text-center text-sm mb-4 show-scroll">
-            Atas Doa dan Restu dari Bapak/Ibu/Saudara/i kami ucapkan banyak
-            terima kasih
-          </p>
-          <p className="text-white text-center text-sm mb-4 show-scroll">
-            Kami yang berbahagia,
-          </p>
-          <p className="text-white text-center font-title text-5xl show-scroll">
-            Alsa & Andree
-          </p>
-        </div>
-      </Page>
+            <div className="mt-20">
+              <p className="text-white text-center text-sm mb-4 show-scroll">
+                Atas Doa dan Restu dari Bapak/Ibu/Saudara/i kami ucapkan banyak
+                terima kasih
+              </p>
+              <p className="text-white text-center text-sm mb-4 show-scroll">
+                Kami yang berbahagia,
+              </p>
+              <p className="text-white text-center font-title text-5xl show-scroll">
+                Andree & Alsa
+              </p>
+            </div>
+          </Page>
+          <Page>
+            <p className="text-white text-center font-bold mb-20">Informasi</p>
+            <p className="text-white text-center text-sm">
+              Guna mencegah penyebaran Covid-19, diharapkan bagi tamu undangan
+              untuk mematuhi Protokol Kesehatan
+            </p>
+            <div className="my-6">
+              <img src="protokol.png" alt="Prokes" />
+              <p className="text-white text-center text-xs">
+                Memakai Masker - Cuci Tangan - Menjaga Jarak
+              </p>
+            </div>
+          </Page>
+        </>
+      )}
     </>
   )
 }
