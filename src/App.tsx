@@ -26,6 +26,10 @@ const observer = new IntersectionObserver(callback)
 
 function App() {
   const [isOpen, setIsOpen] = useState(false)
+  const [popupKadoIsOpen, setPopupKadoIsOpen] = useState(false)
+  const [name, setName] = useState("")
+  const [nominal, setNominal] = useState("")
+  const [media, setMedia] = useState("BCA")
 
   // update once
   useEffect(() => {
@@ -43,6 +47,19 @@ function App() {
   }, [isOpen])
 
   const { to } = queryString.parse(location.search)
+
+  const sumbitConfirm = (e: any) => {
+    e.preventDefault()
+    // console.log(name, nominal, media)
+    const phoneNumber = "+6285156531464"
+    let message = `Hai, Saya ${name} telah mengirimkan kamu kado digital ${nominal} melalui ${media}.`
+    // url encode message
+    message = encodeURIComponent(message)
+    const url = `https://wa.me/${phoneNumber}?text=${message}`
+    // console.log(url)
+    // open url in new tab
+    window.open(url, "_blank")
+  }
 
   return (
     <>
@@ -78,6 +95,109 @@ function App() {
                 </div>
               </div>
             </div>
+          </div>
+        </div>
+      )}
+
+      {popupKadoIsOpen && (
+        <div className="fixed block w-full h-full p-2 bg-gray-800">
+          <div className="flex flex-row justify-center">
+            <div className="basis-full lg:basis-1/3">
+              <div className="flex flex-col bg-white p-4 rounded-2xl mx-auto my-10 shadow-xl">
+                <p className="text-center font-bold mb-4">Kado Digital</p>
+                <p className="text-center mb-4">
+                  Kami menerima kado pernikahan dalam bentuk digital melalui
+                  tombol dibawah ini:
+                </p>
+
+                <div className="rounded-md bg-gray-300 p-4 m-2">
+                  <p className="text-center">
+                    <img src="bca.png" alt="" className="inline h-[40px] mb-2" />
+                  </p>
+                  <p className="text-center mb-2">7790382638</p>
+                  <div className="flex flex-row">
+                    <div className="flex-1 bg-white rounded-md p-2">7790382638</div>
+                    <button
+                      onClick={(e) => copyToClipboard(e, "7790382638")}
+                      className="bg-slate-600 rounded-md p-2 font-bold text-white">
+                      COPY
+                    </button>
+                  </div>
+                </div>
+
+                <div className="rounded-md bg-gray-300 p-4 m-2">
+                  <p className="text-center">
+                    <img src="bri.png" alt="" className="inline h-[40px] mb-2" />
+                  </p>
+                  <p className="text-center mb-2">005701057003503</p>
+                  <div className="flex flex-row">
+                    <div className="flex-1 bg-white rounded-md p-2">005701057003503</div>
+                    <button
+                      onClick={(e) => copyToClipboard(e, "005701057003503")}
+                      className="bg-slate-600 rounded-md p-2 font-bold text-white">
+                      COPY
+                    </button>
+                  </div>
+                </div>
+
+                <p className="mb-6"></p>
+
+                <p className="text-center font-bold mb-4">Konfirmasi</p>
+                <div className="rounded-md bg-gray-300 p-4 m-2">
+                  <div className="mb-2">
+                    <p>Nama</p>
+                    <input
+                      type="text"
+                      className="p-2 rounded-md ml-1"
+                      onChange={(e) => {
+                        setName(e.target.value)
+                      }}
+                    />
+                  </div>
+                  <div className="mb-2">
+                    <p>Nominal</p>
+                    <input
+                      type="number"
+                      className="p-2 rounded-md ml-1"
+                      onChange={(e) => {
+                        setNominal(e.target.value)
+                      }}
+                    />
+                  </div>
+                  <div className="mb-2">
+                    <p>Media</p>
+                    {/* select options */}
+                    <select
+                      className="p-2 rounded-md ml-1"
+                      onChange={(e) => {
+                        setMedia(e.target.value)
+                      }}
+                    >
+                      <option value="BCA">BCA</option>
+                      <option value="BRI">BRI</option>
+                      <option value="Lainnya">Lainnya</option>
+                    </select>
+                  </div>
+                  <div>
+                    <button
+                      onClick={(e) => sumbitConfirm(e)}
+                      className="bg-slate-600 rounded-md p-2 font-bold text-white">
+                      Konfirmasi
+                    </button>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+            {/* button close */}
+            <button
+              onClick={(e) => {
+                e.preventDefault()
+                setPopupKadoIsOpen(false)
+              }}
+              className="w-[30px] h-[30px] text-center leading-[30px] my-2">
+              <i className="fas fa-close text-white text-2xl"></i>
+            </button>
           </div>
         </div>
       )}
@@ -249,6 +369,28 @@ function App() {
               </p>
             </div>
           </Page>
+
+          <Page>
+            <p className="text-white text-center font-bold mb-20">
+              Kado Digital
+            </p>
+            <p className="text-white text-center text-sm mb-4">
+              Kami menerima kado pernikahan dalam bentuk digital melalui tombol
+              dibawah ini
+            </p>
+            <p className="text-center">
+              <button
+                className="bg-gray-600 hover:bg-gray-500 text-white font-bold rounded-md p-2"
+                onClick={(e) => {
+                  e.preventDefault()
+                  setPopupKadoIsOpen(true)
+                }}
+              >
+                Kirim Kado
+              </button>
+            </p>
+          </Page>
+
           <Page>
             <p className="text-white text-center font-bold mb-20">Informasi</p>
             <p className="text-white text-center text-sm">
@@ -269,3 +411,11 @@ function App() {
 }
 
 export default App
+
+function copyToClipboard(e: any, text: string) {
+  e.preventDefault()
+  const cb = navigator.clipboard
+  cb.writeText(text).then(() => {
+    console.log("Copied to clipboard")
+  })
+}

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 
-const audio = new Audio("./allofme_jhon_legend_violin_cover_daniel_jang.mp3")
+const audio = new Audio("./James_Arthur_Falling_Like_The_Stars.mp3")
 
 const AudioPlayer = (props: any) => {
   const [isPlaying, setIsPlaying] = useState(false)
