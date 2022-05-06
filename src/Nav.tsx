@@ -28,6 +28,12 @@ const Nav = () => {
               <i className="fas fa-image text-2xl"></i>
             </div>
           </a>
+
+          <a href="#gift" className="">
+            <div className="text-gray-400 bg-gray-700 hover:bg-gray-500 hover:scale-110 transition ease-out m-1 p-2 w-[50px] h-[50px] rounded-xl leading-[34px] text-center">
+              <i className="fas fa-gift text-2xl"></i>
+            </div>
+          </a>
         </div>
       </div>
     </div>

@@ -6,6 +6,7 @@ import {
   getDocs,
   query,
   onSnapshot,
+  orderBy,
 } from "firebase/firestore"
 import Countdown from "./Countdown"
 import Nav from "./Nav"
@@ -70,8 +71,12 @@ function App() {
   const sumbitConfirm = (e: any) => {
     e.preventDefault()
     // console.log(name, nominal, media)
+    if(name == "" || nominal == ""){
+      console.log("Please fill all fields")
+      return
+    }
     const phoneNumber = "+6285156531464"
-    let message = `Hai, Saya ${name} telah mengirimkan kamu kado digital ${nominal} melalui ${media}.`
+    let message = `Hai, Saya ${name} telah mengirimkan kado digital sebesar ${nominal} melalui ${media}.`
     // url encode message
     message = encodeURIComponent(message)
     const url = `https://wa.me/${phoneNumber}?text=${message}`
@@ -81,7 +86,7 @@ function App() {
   }
 
   const readGreetings = async () => {
-    const q = query(collection(db, "greetings"))
+    const q = query(collection(db, "greetings"), orderBy("datetime", "desc"))
     const unsubscribe = onSnapshot(q, (querySnapshot) => {
       const data: Greeting[] = []
       querySnapshot.forEach((doc) => {
@@ -109,6 +114,12 @@ function App() {
     // console.log(greetName, greetMessage)
     const name = greetName
     const message = greetMessage
+
+    if(name == "" || message == ""){
+      console.log("Please fill all fields")
+      return
+    }
+
     // clear input
     setGreetName("")
     setGreetMessage("")
@@ -166,7 +177,7 @@ function App() {
         <div className="fixed block w-full h-full p-2 bg-gray-800">
           <div className="flex flex-row justify-center">
             <div className="basis-full lg:basis-1/3">
-              <div className="flex flex-col bg-white p-4 rounded-2xl mx-auto my-10 shadow-xl">
+              <div className="flex flex-col bg-white p-4 rounded-2xl mx-auto my-10 shadow-xl overflow-auto h-[600px]">
                 <p className="text-center font-bold mb-4">Kado Digital</p>
                 <p className="text-center mb-4">
                   Kami menerima kado pernikahan dalam bentuk digital melalui
@@ -492,7 +503,7 @@ function App() {
             </div>
           </Page>
 
-          <Page>
+          <Page id="gift">
             <p className="text-white text-center font-bold mb-10">
               Kado Digital
             </p>
