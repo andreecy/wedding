@@ -1,9 +1,18 @@
 import { useEffect, useState } from "react"
 import queryString from "query-string"
+import {
+  collection,
+  addDoc,
+  getDocs,
+  query,
+  onSnapshot,
+} from "firebase/firestore"
 import Countdown from "./Countdown"
 import Nav from "./Nav"
 import Page from "./Page"
 import AudioPlayer from "./AudioPlayer"
+import { db } from "./firebase"
+import moment from "moment"
 
 //scroll animation observer
 const callback = function (entries: any) {
@@ -24,12 +33,22 @@ const callback = function (entries: any) {
 
 const observer = new IntersectionObserver(callback)
 
+type Greeting = {
+  name: string
+  message: string
+  datetime: string
+}
+
 function App() {
   const [isOpen, setIsOpen] = useState(false)
   const [popupKadoIsOpen, setPopupKadoIsOpen] = useState(false)
   const [name, setName] = useState("")
   const [nominal, setNominal] = useState("")
   const [media, setMedia] = useState("BCA")
+
+  const [greetName, setGreetName] = useState("")
+  const [greetMessage, setGreetMessage] = useState("")
+  const [greetings, setGreetings] = useState<Greeting[]>([])
 
   // update once
   useEffect(() => {
@@ -59,6 +78,50 @@ function App() {
     // console.log(url)
     // open url in new tab
     window.open(url, "_blank")
+  }
+
+  const readGreetings = async () => {
+    const q = query(collection(db, "greetings"))
+    const unsubscribe = onSnapshot(q, (querySnapshot) => {
+      const data: Greeting[] = []
+      querySnapshot.forEach((doc) => {
+        const greeting = {
+          name: doc.data().name,
+          message: doc.data().message,
+          // moment parse from Date()
+          datetime: moment(doc.data().datetime.toDate()).format(
+            "DD MMM YYYY, HH:mm"
+          ),
+        }
+        data.push(greeting)
+      })
+      console.log("Greetings ", data)
+      setGreetings(data)
+    })
+  }
+
+  // read greetings on didmount
+  useEffect(() => {
+    readGreetings()
+  }, [])
+
+  const sendGreeting = async () => {
+    // console.log(greetName, greetMessage)
+    const name = greetName
+    const message = greetMessage
+    // clear input
+    setGreetName("")
+    setGreetMessage("")
+    try {
+      const docRef = await addDoc(collection(db, "greetings"), {
+        name: name,
+        message: message,
+        datetime: new Date(),
+      })
+      // console.log("Document written with ID: ", docRef.id)
+    } catch (e) {
+      console.error("Error sending greeting: ", e)
+    }
   }
 
   return (
@@ -112,14 +175,21 @@ function App() {
 
                 <div className="rounded-md bg-gray-300 p-4 m-2">
                   <p className="text-center">
-                    <img src="bca.png" alt="" className="inline h-[40px] mb-2" />
+                    <img
+                      src="bca.png"
+                      alt=""
+                      className="inline h-[40px] mb-2"
+                    />
                   </p>
                   <p className="text-center mb-2">7790382638</p>
                   <div className="flex flex-row">
-                    <div className="flex-1 bg-white rounded-md p-2">7790382638</div>
+                    <div className="flex-1 bg-white rounded-md p-2">
+                      7790382638
+                    </div>
                     <button
                       onClick={(e) => copyToClipboard(e, "7790382638")}
-                      className="bg-slate-600 rounded-md p-2 font-bold text-white">
+                      className="bg-slate-600 rounded-md p-2 font-bold text-white"
+                    >
                       COPY
                     </button>
                   </div>
@@ -127,14 +197,21 @@ function App() {
 
                 <div className="rounded-md bg-gray-300 p-4 m-2">
                   <p className="text-center">
-                    <img src="bri.png" alt="" className="inline h-[40px] mb-2" />
+                    <img
+                      src="bri.png"
+                      alt=""
+                      className="inline h-[40px] mb-2"
+                    />
                   </p>
                   <p className="text-center mb-2">005701057003503</p>
                   <div className="flex flex-row">
-                    <div className="flex-1 bg-white rounded-md p-2">005701057003503</div>
+                    <div className="flex-1 bg-white rounded-md p-2">
+                      005701057003503
+                    </div>
                     <button
                       onClick={(e) => copyToClipboard(e, "005701057003503")}
-                      className="bg-slate-600 rounded-md p-2 font-bold text-white">
+                      className="bg-slate-600 rounded-md p-2 font-bold text-white"
+                    >
                       COPY
                     </button>
                   </div>
@@ -181,11 +258,11 @@ function App() {
                   <div>
                     <button
                       onClick={(e) => sumbitConfirm(e)}
-                      className="bg-slate-600 rounded-md p-2 font-bold text-white">
+                      className="bg-slate-600 rounded-md p-2 font-bold text-white"
+                    >
                       Konfirmasi
                     </button>
                   </div>
-
                 </div>
               </div>
             </div>
@@ -195,7 +272,8 @@ function App() {
                 e.preventDefault()
                 setPopupKadoIsOpen(false)
               }}
-              className="w-[30px] h-[30px] text-center leading-[30px] my-2">
+              className="w-[30px] h-[30px] text-center leading-[30px] my-2"
+            >
               <i className="fas fa-close text-white text-2xl"></i>
             </button>
           </div>
@@ -371,7 +449,51 @@ function App() {
           </Page>
 
           <Page>
-            <p className="text-white text-center font-bold mb-20">
+            <p className="text-white text-center font-bold mb-10">Ucapan</p>
+
+            <div>
+              <input
+                type="text"
+                className="bg-white rounded-md mb-2 p-2"
+                placeholder="Tulis Nama"
+                onChange={(e) => setGreetName(e.target.value)}
+                value={greetName}
+              />
+            </div>
+            <div>
+              <textarea
+                rows={3}
+                className="bg-white rounded-md mb-2 p-2"
+                placeholder="Sampaikan Pesan dan Ucapan"
+                onChange={(e) => setGreetMessage(e.target.value)}
+                value={greetMessage}
+              />
+            </div>
+            <p className="text-center">
+              <button
+                className="bg-gray-600 hover:bg-gray-500 text-white font-bold rounded-md p-2"
+                onClick={(e) => {
+                  e.preventDefault()
+                  sendGreeting()
+                }}
+              >
+                Kirim Ucapan
+              </button>
+            </p>
+
+            <div className="my-8 p-2 overflow-auto h-96">
+              {greetings.map((item, index) => (
+                <div key={index} className="bg-gray-300 rounded-md p-3 my-3">
+                  <p className="font-bold">{item.name}</p>
+                  <p className="text-sm">{item.message}</p>
+                  <p className="text-sm text-gray-500">{item.datetime}</p>
+                </div>
+              ))}
+            </div>
+          </Page>
+
+          <Page>
+            <p className="text-white text-center font-bold mb-10">
               Kado Digital
             </p>
             <p className="text-white text-center text-sm mb-4">
@@ -389,10 +511,9 @@ function App() {
                 Kirim Kado
               </button>
             </p>
-          </Page>
+            <p className="mb-10"></p>
 
-          <Page>
-            <p className="text-white text-center font-bold mb-20">Informasi</p>
+            <p className="text-white text-center font-bold mb-10">Informasi</p>
             <p className="text-white text-center text-sm">
               Guna mencegah penyebaran Covid-19, diharapkan bagi tamu undangan
               untuk mematuhi Protokol Kesehatan
