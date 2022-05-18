@@ -199,7 +199,7 @@ function App() {
                     </div>
                     <button
                       onClick={(e) => copyToClipboard(e, "7790382638")}
-                      className="bg-slate-600 rounded-md p-2 font-bold text-white"
+                      className="bg-slate-600 rounded-md p-2 font-bold text-white ml-2"
                     >
                       COPY
                     </button>
@@ -221,7 +221,7 @@ function App() {
                     </div>
                     <button
                       onClick={(e) => copyToClipboard(e, "005701057003503")}
-                      className="bg-slate-600 rounded-md p-2 font-bold text-white"
+                      className="bg-slate-600 rounded-md p-2 font-bold text-white ml-2"
                     >
                       COPY
                     </button>
@@ -236,7 +236,7 @@ function App() {
                     <p>Nama</p>
                     <input
                       type="text"
-                      className="p-2 rounded-md ml-1"
+                      className="p-2 rounded-md ml-1 w-1/2"
                       onChange={(e) => {
                         setName(e.target.value)
                       }}
@@ -246,7 +246,7 @@ function App() {
                     <p>Nominal</p>
                     <input
                       type="number"
-                      className="p-2 rounded-md ml-1"
+                      className="p-2 rounded-md ml-1 w-1/2"
                       onChange={(e) => {
                         setNominal(e.target.value)
                       }}
@@ -256,7 +256,7 @@ function App() {
                     <p>Media</p>
                     {/* select options */}
                     <select
-                      className="p-2 rounded-md ml-1"
+                      className="p-2 rounded-md ml-1 w-1/2"
                       onChange={(e) => {
                         setMedia(e.target.value)
                       }}
@@ -465,7 +465,7 @@ function App() {
             <div>
               <input
                 type="text"
-                className="bg-white rounded-md mb-2 p-2"
+                className="bg-white rounded-md mb-2 p-2 w-full"
                 placeholder="Tulis Nama"
                 onChange={(e) => setGreetName(e.target.value)}
                 value={greetName}
@@ -474,7 +474,7 @@ function App() {
             <div>
               <textarea
                 rows={3}
-                className="bg-white rounded-md mb-2 p-2"
+                className="bg-white rounded-md mb-2 p-2 w-full"
                 placeholder="Sampaikan Pesan dan Ucapan"
                 onChange={(e) => setGreetMessage(e.target.value)}
                 value={greetMessage}
